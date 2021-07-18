@@ -51,4 +51,5 @@ client.on('message',async (message) => {
     }
  
 })
-client.login('ODY1NDc1NjQyMTE5MTU5ODA4.YPEjAA.yX4g-lz0QfT7MKCFeuCC8FwiVEs');
+const auth = require(`./auth.json`)
+client.login(auth.TOKEN);
