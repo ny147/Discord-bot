@@ -57,10 +57,6 @@ for (const file of eventFiles) {
 //  remider feature
 Task.forEach(async (e) => {
 	remider(e.name,e.time,client)
-	// console.log('test')
-	
-	
-	
 })
 
 client.login(token);
