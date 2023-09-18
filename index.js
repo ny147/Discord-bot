@@ -42,6 +42,6 @@ for (const file of eventFiles) {
 retriveTask.then((TaskList) => {
 	TaskList.forEach(e => {
 		reminder(e.Task,e.time,client)
-	});
+	})
 })
 client.login(token);

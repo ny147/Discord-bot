@@ -17,7 +17,8 @@ const Reminder = (Taskname,Time,client)=>{
 	if((Targetduration - NowDuration) > 0){
 		let timeout = setTimeout(
 			()=>{
-				client.channels.cache.get('931062873088753684').send(`Hey It's time to start ${Taskname} Finish your Job!`)
+				
+				client.users.cache.get('481828170924818432').send(`Hey It's time to start ${Taskname} Finish your Job!`);
 				console.log(`${hour}:${minute}`)
 			},
 			Targetduration - NowDuration

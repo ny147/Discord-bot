@@ -7,6 +7,7 @@ const retriveTask = async (Day) =>{
     await data(Day).then(  (element) => {
         
         for ( i of element.results){
+           
             newTask =  {
                 Task:i.properties.Name.title[0].plain_text,
                 day:Day,
@@ -18,12 +19,13 @@ const retriveTask = async (Day) =>{
         
     }).then( ()=> {
         const fs = require('fs')
-        const path  = '../daily.json'
+        const path  = './daily.json'
         try {
             fs.writeFileSync(path, JSON.stringify(Task))
           } catch (err) {
             console.error(err)
           }
+          console.log('test')
     })
     
     return Task
