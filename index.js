@@ -2,8 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
-const Task = require('./feature/gettime')
-const remider = require('./feature/reminder')
+const retriveTask = require('./feature/query/retriveTask')
+const reminder = require('./feature/reminder')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
@@ -38,25 +38,10 @@ for (const file of eventFiles) {
 }
 
 
-// const Reminder = (Taskname,Time)=>{
-	
-// 	let interval = setInterval(async ()=>{
-// 		const date = new Date();
-// 		if(date.getHours() == 22 && date.getMinutes() == 30 ){
-		
-		
-// 		client.channels.cache.get('931062873088753684').send('hello there')
-// 		clearInterval(interval)
-// 		}
-// 		console.log(`${date.getHours()} : ${date.getMinutes()}`)
-// 	},1000*60)
-// }
-
-
-
 //  remider feature
-Task.forEach(async (e) => {
-	remider(e.name,e.time,client)
+retriveTask.then((TaskList) => {
+	TaskList.forEach(e => {
+		reminder(e.Task,e.time,client)
+	});
 })
-
 client.login(token);
