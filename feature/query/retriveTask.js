@@ -47,7 +47,6 @@ const retriveTask = async (Day) => {
       }
     });
 
-  //   console.log(Task);
   Task.sort(compareValues);
   return Task;
 };

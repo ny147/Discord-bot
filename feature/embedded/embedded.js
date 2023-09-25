@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 
 // inside a command, event listener, etc.
-const exampleEmbed = new EmbedBuilder()
+const StartEmbed = new EmbedBuilder()
   .setColor(0x0099ff)
   .setTitle("Daily Habit")
   .setURL(
@@ -15,14 +15,8 @@ const exampleEmbed = new EmbedBuilder()
   })
   .setDescription(`Let's start today!! with this TaskList`)
   .setThumbnail("https://media.giphy.com/media/J3w29yVdPFND0xlN3F/giphy.gif")
-  // .addFields(
-  // 	{ name: 'Workout', value: '11:50' },
-  // 	// { name: '\u200B', value: '\u200B' },
-  // 	{ name: 'Jogging', value: '12:30', inline: true },
-  // 	{ name: 'Inline field title', value: 'Some value here', inline: true },
-  // )
   .setImage("https://media.giphy.com/media/4oj3Nr3ALQlzvv6r1v/giphy.gif")
   .setTimestamp();
 // .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
-module.exports = exampleEmbed;
+module.exports = StartEmbed;
