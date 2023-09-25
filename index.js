@@ -43,11 +43,5 @@ for (const file of eventFiles) {
   }
 }
 
-// //  remider feature
-// retriveTask.then((TaskList) => {
-// 	TaskList.forEach(e => {
-// 		Reminder(e.Task,e.time,client)
-// 	})
-// })
 keepalive();
 client.login(process.env.TOKEN);

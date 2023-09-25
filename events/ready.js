@@ -8,6 +8,7 @@ module.exports = {
   async execute(client) {
     console.log(`Ready! Logged in as ${client.user.tag}`);
 
+    // set reminder
     retriveTask.then(async (TaskList) => {
       await TaskList.forEach((e) => {
         Reminder(e.Task, e.time, client);
