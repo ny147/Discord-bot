@@ -25,7 +25,6 @@ const retriveTask = async (Day) =>{
           } catch (err) {
             console.error(err)
           }
-          console.log('test')
     })
     
     return Task
