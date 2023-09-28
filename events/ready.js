@@ -1,6 +1,6 @@
 const { Events } = require("discord.js");
 const embedded = require("../feature/embedded/embedded");
-const retriveTask = require("../feature/query/retriveTask");
+const getTaskList = require("../feature/query/getTaskList");
 const Reminder = require("../feature/reminder");
 module.exports = {
   name: Events.ClientReady,
@@ -9,10 +9,10 @@ module.exports = {
     console.log(`Ready! Logged in as ${client.user.tag}`);
 
     // set reminder
-    retriveTask.then(async (TaskList) => {
-      await TaskList.forEach((e) => {
-        Reminder(e.Task, e.time, client);
+    getTaskList.then(async (TaskList) => {
+      await TaskList.map((e) => {
         embedded.addFields({ name: e.Task, value: `${e.time}`, inline: true });
+        Reminder(e.Task, e.time, client);
       });
       client.channels.cache
         .get("931062873088753684")

@@ -1,5 +1,4 @@
 const { Client } = require("@notionhq/client");
-// const config = require('../../config.json')
 const dotenv = require("dotenv").config();
 const notion = new Client({ auth: process.env.NOTION_KEY });
 const databaseId = "dff43897c5484289b56257d2fd2773ef";
