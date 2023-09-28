@@ -1,5 +1,7 @@
 const data = require("./querynotion");
-const currentDate = new Date();
+const { DateTime } = require("luxon");
+// const currentDate = new Date();
+const currentDate = DateTime.now().setZone("Asia/Bangkok");
 const weekMap = {
   0: "Sunday",
   1: "Monday",
@@ -51,4 +53,4 @@ const retriveTask = async (Day) => {
   return Task;
 };
 
-module.exports = retriveTask(weekMap[currentDate.getDay()]);
+module.exports = retriveTask(weekMap[currentDate.weekday]);
