@@ -1,6 +1,10 @@
-// const { DateTime } = require("luxon");
+const { DateTime } = require("luxon");
 
-// console.log(DateTime.now().setZone("Asia/Bangkok").weekday);
+let [hour, minute] = [
+  DateTime.now().setZone("Asia/Bangkok").hour,
+  DateTime.now().setZone("Asia/Bangkok").minute,
+];
+console.log(hour, minute);
 // const { error } = require("console");
 // const data = require("./feature/query/querynotion");
 // data("Sunday")

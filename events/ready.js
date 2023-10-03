@@ -8,26 +8,42 @@ module.exports = {
   once: true,
   async execute(client) {
     console.log(`Ready! Logged in as ${client.user.tag}`);
+
+    getTaskList
+      .then(async (TaskList) => {
+        const setEmbeded = await TaskList.map((e) => {
+          embedded.addFields({
+            name: e.Task,
+            value: `${e.time}`,
+            inline: true,
+          });
+        });
+        client.channels.cache
+          .get("931062873088753684")
+          .send({ embeds: [embedded] });
+
+        const setReminder = await TaskList.map((e) => {
+          reminder(e.Task, e.time, client);
+        });
+      })
+      .catch((error) => console.error(error));
+
     setSchedule("0 0 * * *", () => {
-      getTaskList
-        .then(async (TaskList) => {
-          const setEmbeded = await TaskList.map((e) => {
-            embedded.addFields({
-              name: e.Task,
-              value: `${e.time}`,
-              inline: true,
-            });
-          }).then(() => {
-            client.channels.cache
-              .get("931062873088753684")
-              .send({ embeds: [embedded] });
+      getTaskList.then(async (TaskList) => {
+        const setEmbeded = await TaskList.map((e) => {
+          embedded.addFields({
+            name: e.Task,
+            value: `${e.time}`,
+            inline: true,
           });
-          const setReminder = await TaskList.map((e) => {
-            reminder(e.Task, e.time, client);
-          });
-          console.log(TaskList);
-        })
-        .catch((error) => console.error(error));
+        });
+        client.channels.cache
+          .get("931062873088753684")
+          .send({ embeds: [embedded] });
+        const setReminder = await TaskList.map((e) => {
+          reminder(e.Task, e.time, client);
+        });
+      });
     });
   },
 };

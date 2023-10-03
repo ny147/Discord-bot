@@ -1,9 +1,12 @@
+const { DateTime } = require("luxon");
 const Reminder = (Taskname, Time, client) => {
-  const date = new Date();
+  const date = DateTime.now().setZone("Asia/Bangkok");
   let [hour, minute] = Time.split(":");
   let Targetduration = hour * 3600000 + minute * 60000;
-  let NowDuration = date.getHours() * 3600000 + date.getMinutes() * 60000;
-
+  let NowDuration = date.hour * 3600000 + date.minute * 60000;
+  console.log(
+    `${Taskname} current -> ${date.hour}:${date.minute} , target ->${Time}`
+  );
   if (Targetduration - NowDuration > 0) {
     let timeout = setTimeout(() => {
       client.channels.cache
