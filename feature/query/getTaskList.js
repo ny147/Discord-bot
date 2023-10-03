@@ -25,8 +25,10 @@ const compareTaskByTime = (a, b) => {
 
 const getTaskList = async (Day) => {
   let Task = [];
+
   await data(Day)
     .then((element) => {
+      if (element.results.length === 0) throw "No Task";
       for (i of element.results) {
         Task.push({
           Task: i.properties.Name.title[0].plain_text,
@@ -44,10 +46,12 @@ const getTaskList = async (Day) => {
         console.error(err);
       }
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.error(error));
 
   Task.sort(compareTaskByTime);
+
   return Task;
 };
 
 module.exports = getTaskList(weekMap[currentDate.weekday]);
+// module.exports = getTaskList;
