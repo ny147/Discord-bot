@@ -29,7 +29,7 @@ module.exports = {
       })
       .catch((error) => console.error(error));
 
-    setSchedule("15 16 * * *", () => {
+    setSchedule("10 0 * * *", () => {
       getTaskList
         .then(async (TaskList) => {
           const setEmbeded = await TaskList.map((e) => {
