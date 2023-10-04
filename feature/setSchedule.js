@@ -1,7 +1,7 @@
 var cron = require("node-cron");
 
 setSchedule = (crontime, jobfunction) => {
-  cron.schedule("0 0 * * *", jobfunction, {
+  cron.schedule(crontime, jobfunction, {
     scheduled: true,
     timezone: "Asia/Bangkok",
   });

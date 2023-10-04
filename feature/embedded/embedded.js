@@ -15,8 +15,7 @@ const StartEmbed = new EmbedBuilder()
   })
   .setDescription(`Let's start today!! with this TaskList`)
   .setThumbnail("https://media.giphy.com/media/J3w29yVdPFND0xlN3F/giphy.gif")
-  .setImage("https://media.giphy.com/media/4oj3Nr3ALQlzvv6r1v/giphy.gif")
-  .setTimestamp();
+  .setImage("https://media.giphy.com/media/4oj3Nr3ALQlzvv6r1v/giphy.gif");
 // .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
 module.exports = StartEmbed;
