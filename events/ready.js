@@ -3,53 +3,37 @@ const embedded = require("../feature/embedded/embedded");
 const getTaskList = require("../feature/query/getTaskList");
 const reminder = require("../feature/reminder");
 const setSchedule = require("../feature/setSchedule");
+const setNotification = (client) => {
+  getTaskList()
+    .then(async (TaskList) => {
+      const setEmbeded = await TaskList.map((e) => {
+        embedded
+          .addFields({
+            name: e.Task,
+            value: `${e.time}`,
+            inline: true,
+          })
+          .setTimestamp();
+      });
+      client.channels.cache
+        .get("931062873088753684")
+        .send({ embeds: [embedded] });
+      const setReminder = await TaskList.map((e) => {
+        reminder(e.Task, e.time, client);
+      });
+    })
+    .catch((error) => console.error(error));
+};
+
 module.exports = {
   name: Events.ClientReady,
   once: true,
   async execute(client) {
     console.log(`Ready! Logged in as ${client.user.tag}`);
-
-    getTaskList
-      .then(async (TaskList) => {
-        const setEmbeded = await TaskList.map((e) => {
-          embedded
-            .addFields({
-              name: e.Task,
-              value: `${e.time}`,
-              inline: true,
-            })
-            .setTimestamp();
-        });
-        client.channels.cache
-          .get("931062873088753684")
-          .send({ embeds: [embedded] });
-        const setReminder = await TaskList.map((e) => {
-          reminder(e.Task, e.time, client);
-        });
-      })
-      .catch((error) => console.error(error));
-
-    setSchedule("10 0 * * *", () => {
-      getTaskList
-        .then(async (TaskList) => {
-          const setEmbeded = await TaskList.map((e) => {
-            embedded.spliceFields(0, embedded.data.fields.length);
-            embedded
-              .addFields({
-                name: e.Task,
-                value: `${e.time}`,
-                inline: true,
-              })
-              .setTimestamp();
-          });
-          client.channels.cache
-            .get("931062873088753684")
-            .send({ embeds: [embedded] });
-          const setReminder = await TaskList.map((e) => {
-            reminder(e.Task, e.time, client);
-          });
-        })
-        .catch((error) => console.log(error));
+    setNotification(client);
+    // 10 0 * * *
+    setSchedule("2 10 * * *", () => {
+      setNotification(client);
     });
   },
 };
