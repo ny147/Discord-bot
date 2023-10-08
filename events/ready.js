@@ -3,7 +3,7 @@ const embedded = require("../feature/embedded/embedded");
 const getTaskList = require("../feature/query/getTaskList");
 const reminder = require("../feature/reminder");
 const setSchedule = require("../feature/setSchedule");
-const setNotification = (client) => {
+const setNotification = (client, ct) => {
   getTaskList()
     .then(async (TaskList) => {
       const setEmbeded = await TaskList.map((e) => {
@@ -15,9 +15,13 @@ const setNotification = (client) => {
           })
           .setTimestamp();
       });
+
       client.channels.cache
         .get("931062873088753684")
-        .send({ embeds: [embedded] });
+        .send({ embeds: [embedded] })
+        .then(() => {
+          embedded.spliceFields(0, embedded.length);
+        });
       const setReminder = await TaskList.map((e) => {
         reminder(e.Task, e.time, client);
       });
@@ -30,9 +34,10 @@ module.exports = {
   once: true,
   async execute(client) {
     console.log(`Ready! Logged in as ${client.user.tag}`);
-    setNotification(client);
-    // 10 0 * * *
-    setSchedule("2 10 * * *", () => {
+    let ct = 0;
+    setNotification(client, ct);
+
+    setSchedule("0 10 * * *", () => {
       setNotification(client);
     });
   },

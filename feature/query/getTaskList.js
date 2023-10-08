@@ -22,10 +22,10 @@ const compareTaskByTime = (a, b) => {
   return hourComparison;
 };
 
-const getTaskList = async () => {
+const getTaskList = async (d) => {
   let Task = [];
   const currentDate = DateTime.now().setZone("Asia/Bangkok");
-  const Day = weekMap[currentDate.weekday];
+  let Day = weekMap[currentDate.weekday];
   await data(Day)
     .then((element) => {
       if (element.results.length === 0) throw "No Task";
@@ -54,4 +54,3 @@ const getTaskList = async () => {
 };
 
 module.exports = getTaskList;
-// module.exports = getTaskList;
