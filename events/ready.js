@@ -37,7 +37,7 @@ module.exports = {
     let ct = 0;
     setNotification(client, ct);
 
-    setSchedule("0 10 * * *", () => {
+    setSchedule("10 0 * * *", () => {
       setNotification(client);
     });
   },
